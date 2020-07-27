@@ -1,5 +1,3 @@
-from gensim.models.keyedvectors import KeyedVectors
-from collections import Counter
 import csv
 from pathlib import Path
 
