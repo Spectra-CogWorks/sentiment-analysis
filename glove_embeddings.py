@@ -71,3 +71,24 @@ def get_phrase_embedding(phrase, idf):
   phrase_embedding /= np.linalg.norm(embedding)
 
   return phrase_embedding
+
+def generate_idf(phrases):
+  """Generates an inverse document frequency dictionary for `phrases`
+  
+  Parameters
+  ----------
+  phrases : List[str]
+    List of "phrases" (i.e. tweets) to generate an IDF dictionary for
+
+  Returns
+  -------
+  idf : Dict[str, float]
+    A dictionary mapping words to their inverse document frequency
+  """
+  cross_phrase_counts = Counter()
+
+  for phrase in phrases:
+    uniq_words = set(get_words(phrase))
+    cross_phrase_counts.update(Counter(uniq_words))
+  
+  return {word: np.log(len(phrases) / count) for word, count in cross_phrase_counts.most_common()}
