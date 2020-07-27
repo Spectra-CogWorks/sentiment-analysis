@@ -1,4 +1,5 @@
 .vscode/
 __pycache__
+.ipynb_checkpoints
 trainingandtestdata
 glove.6B.50d.txt.w2v
