@@ -1,0 +1,4 @@
+.vscode/
+__pycache__
+trainingandtestdata
+glove.6B.50d.txt.w2v
