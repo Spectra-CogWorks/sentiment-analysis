@@ -42,9 +42,32 @@ def get_word_embedding(word):
   else:
     return None
 
-def get_phrase_embedding(phrase):
-  """Returns 
+def get_phrase_embedding(phrase, idf):
+  """Returns a summed phrase embedding for `phrase` given `idf`
 
+  Parameters
+  ----------
+  phrase : str
+    The phrase for which to calculate an embedding for
+
+  idf : Dict[str, float]
+    A dictionary mapping words to their inverse document frequency
+
+  Returns
+  -------
+  embedding : np.ndarray - shape(50,)
+    The phrase embedding for `phrase`
   """
+  phrase_embedding = np.zeros((50,))
 
-  word_embeddings = []
+  for word in get_words(phrase):
+    word_embedding = get_word_embedding(word)
+
+    if word_embedding is None:
+      continue
+    
+    phrase_embedding += word_embedding * idf[word]
+
+  phrase_embedding /= np.linalg.norm(embedding)
+
+  return phrase_embedding
