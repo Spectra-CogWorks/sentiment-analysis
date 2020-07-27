@@ -14,3 +14,6 @@ as a list of lists, the fields are as follows (as copied from http://help.sentim
 
 with open(Path("./trainingandtestdata/training.1600000.processed.noemoticon.csv")) as train_data_file:
   train_data = list(csv.reader(train_data_file))
+
+polarities = [row[0] for row in train_data]
+tweets = [row[5] for row in train_data]
