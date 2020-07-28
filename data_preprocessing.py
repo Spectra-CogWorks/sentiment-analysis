@@ -26,4 +26,4 @@ def generate_training_data():
   for polarity in sentiment140.polarities:
     categories.append(int(int(polarity) / 2))
 
-  return (np.vstack(embeddings), np.array(one_hots))
+  return (np.vstack(embeddings), np.array(categories))
