@@ -1,6 +1,7 @@
 from gensim.models.keyedvectors import KeyedVectors
 from collections import Counter
 import numpy as np
+import re
 
 _PUNC_REGEX = re.compile('[{}]'.format(re.escape(string.punctuation)))
 

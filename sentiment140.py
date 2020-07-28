@@ -12,7 +12,7 @@ as a list of lists, the fields are as follows (as copied from http://help.sentim
   5 - the text of the tweet (Lyx is cool)
 """
 
-with open(Path("./trainingandtestdata/training.1600000.processed.noemoticon.csv")) as train_data_file:
+with open(Path("./trainingandtestdata/training.1600000.processed.noemoticon.csv"), encoding="latin-1") as train_data_file:
   train_data = list(csv.reader(train_data_file))
 
 polarities = [row[0] for row in train_data]
