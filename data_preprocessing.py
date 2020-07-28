@@ -7,10 +7,9 @@ def generate_training_data():
 
   Returns
   -------
-  data : Tuple[np.ndarray - shape(N, 50), shape(N, 3)]
+  data : Tuple[np.ndarray - shape(N, 50), shape(N,)]
     Training data tuple with the first element being the embeddings of every
-    tweet in the dataset and the second being a one-hot encoding of [negative,
-    neutral, positive]
+    tweet in the dataset and the second being the category of the data
   """
   print("Generating IDF...")
   idf = glove_embeddings.generate_idf(sentiment140.tweets)
@@ -22,11 +21,9 @@ def generate_training_data():
 
   print("Embeddings done")
 
-  one_hots = []
+  categories = []
 
   for polarity in sentiment140.polarities:
-    one_hot = np.zeros((3,))
-    one_hot[int(int(polarity) / 2)] = 1
-    one_hots.append(one_hot)
+    categories.append(int(int(polarity) / 2))
 
-  return (np.vstack(embeddings), np.vstack(one_hots))
+  return (np.vstack(embeddings), np.array(one_hots))
