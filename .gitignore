@@ -3,3 +3,4 @@ __pycache__
 .ipynb_checkpoints
 trainingandtestdata
 glove.6B.50d.txt.w2v
+model_data.pkl
