@@ -57,8 +57,8 @@ def get_phrase_embedding(phrase, idf):
 
   Returns
   -------
-  embedding : np.ndarray - shape(50,)
-    The phrase embedding for `phrase`
+  embedding : Union[NoneType, np.ndarray] - shape(50,)
+    The phrase embedding for `phrase` if it can be calculated, `None` otherwise
   """
   phrase_embedding = np.zeros((50,))
 
@@ -69,6 +69,9 @@ def get_phrase_embedding(phrase, idf):
       continue
     
     phrase_embedding += word_embedding * idf[word]
+
+  if np.mean(np.unique(phrase_embedding)) == 0:
+    return None
 
   phrase_embedding /= np.linalg.norm(phrase_embedding)
 
@@ -93,4 +96,4 @@ def generate_idf(phrases):
     uniq_words = set(get_words(phrase))
     cross_phrase_counts.update(Counter(uniq_words))
   
-  return {word: np.log(len(phrases) / count) for word, count in cross_phrase_counts.most_common()}
+  return {word: np.log(len(phrases) / count + 1) for word, count in cross_phrase_counts.most_common()}

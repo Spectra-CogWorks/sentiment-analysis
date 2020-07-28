@@ -15,15 +15,12 @@ def generate_training_data():
   idf = glove_embeddings.generate_idf(sentiment140.tweets)
   print("Done")
   embeddings = []
-  
-  for tweet in sentiment140.tweets:
-    embeddings.append(glove_embeddings.get_phrase_embedding(tweet, idf))
-
-  print("Embeddings done")
-
   categories = []
-
-  for polarity in sentiment140.polarities:
-    categories.append(1 if polarity == "4" else 0)
+  
+  for index, tweet in enumerate(sentiment140.tweets):
+    embedding = glove_embeddings.get_phrase_embedding(tweet, idf)
+    if embedding is not None:
+      embeddings.append(embedding)
+      categories.append(1 if sentiment140.polarities[index] == "4" else 0)
 
   return (np.vstack(embeddings), np.array(categories))
