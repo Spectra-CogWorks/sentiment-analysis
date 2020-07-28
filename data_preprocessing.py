@@ -12,17 +12,21 @@ def generate_training_data():
     tweet in the dataset and the second being a one-hot encoding of [negative,
     neutral, positive]
   """
+  print("Generating IDF...")
   idf = glove_embeddings.generate_idf(sentiment140.tweets)
+  print("Done")
   embeddings = []
   
   for tweet in sentiment140.tweets:
-    embeddings.append(glove_embeddings.get_phrase_embedding(tweet))
+    embeddings.append(glove_embeddings.get_phrase_embedding(tweet, idf))
+
+  print("Embeddings done")
 
   one_hots = []
 
   for polarity in sentiment140.polarities:
     one_hot = np.zeros((3,))
-    one_hot[int(polarity / 2)] = 1
+    one_hot[int(int(polarity) / 2)] = 1
     one_hots.append(one_hot)
 
   return (np.vstack(embeddings), np.vstack(one_hots))

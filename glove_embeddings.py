@@ -2,6 +2,7 @@ from gensim.models.keyedvectors import KeyedVectors
 from collections import Counter
 import numpy as np
 import re
+import string
 
 _PUNC_REGEX = re.compile('[{}]'.format(re.escape(string.punctuation)))
 
@@ -69,7 +70,7 @@ def get_phrase_embedding(phrase, idf):
     
     phrase_embedding += word_embedding * idf[word]
 
-  phrase_embedding /= np.linalg.norm(embedding)
+  phrase_embedding /= np.linalg.norm(phrase_embedding)
 
   return phrase_embedding
 
