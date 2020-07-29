@@ -1,4 +1,8 @@
+print("Loading word embeddings...")
+
 import glove_embeddings
+
+print("Loading other libraries...")
 
 import mygrad as mg
 import numpy as np
@@ -9,6 +13,8 @@ from mynn.optimizers.adam import Adam
 from mygrad.nnet.activations import relu
 from mygrad.nnet.initializers import glorot_normal
 from mygrad.nnet.losses import softmax_crossentropy
+
+print("Loading model...")
 
 import pickle
 
@@ -47,6 +53,8 @@ model.load_model("./model_data.npz")
 
 with open("model_idf.pkl", "rb") as f:
   idf = pickle.load(f)
+
+print("Sentiment Analysis is ready. Type phrases to analyze or /exit to exit.")
 
 while True:
   phrase = input("Enter phrase to classify: ")
